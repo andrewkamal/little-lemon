@@ -1,7 +1,7 @@
 function Nav() {
   return (
-    <nav aria-label="Primary navigation">
-      <ul>
+    <nav aria-label="Primary navigation" className="site-nav">
+      <ul className="container nav-list">
         <li>
           <a href="#home">Home</a>
         </li>
