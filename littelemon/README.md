@@ -1,70 +1,130 @@
-# Getting Started with Create React App
+# Little Lemon
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Little Lemon is a React single-page restaurant website for a fictional Mediterranean restaurant in Chicago. It includes a marketing homepage, featured menu sections, customer testimonials, and an online table reservation flow with validation.
+
+## Overview
+
+This project was built with Create React App and React Router. The application centers on two main user journeys:
+
+- browsing the restaurant landing page
+- reserving a table through the booking form
+
+The booking flow supports dynamic time-slot updates and a confirmation route after successful submission.
+
+## Features
+
+- Hero section with restaurant branding and primary reservation call to action
+- Specials section highlighting featured menu items
+- Testimonials section with customer reviews
+- Restaurant information section for the Little Lemon story
+- Reservation form with validation for date, time, guest count, and occasion
+- Route-based navigation using React Router
+- Confirmation screen after a successful booking submission
+- Unit tests for core booking and routing behavior
+
+## Tech Stack
+
+- React
+- React Router
+- Formik
+- React Testing Library
+- Jest DOM
+- Create React App
+
+## Project Structure
+
+```text
+src/
+	App.js
+	App.css
+	index.js
+	components/
+		BookingForm.js
+		BookingPage.js
+		CallToAction.js
+		Chicago.js
+		ConfirmedBooking.js
+		CustomersSay.js
+		Footer.js
+		Header.js
+		HomePage.js
+		Main.js
+		Nav.js
+		Specials.js
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18 or later recommended
+- npm
+
+### Installation
+
+```bash
+npm install
+```
+
+### Run the App
+
+```bash
+npm start
+```
+
+The development server runs at `http://localhost:3000`.
 
 ## Available Scripts
 
-In the project directory, you can run:
-
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Starts the development server with hot reload.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Runs the test suite.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Creates an optimized production build in the `build/` directory.
 
 ### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Exposes the Create React App configuration. This is irreversible and usually unnecessary for this project.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Booking API Integration
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The booking flow is designed to work with globally available browser functions:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- `window.fetchAPI(date)` for retrieving available booking times
+- `window.submitAPI(formData)` for submitting a reservation
 
-## Learn More
+If those functions are not available, the app falls back to local defaults so the UI remains usable during development and testing.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+In this codebase, those globals are expected to be loaded through the public HTML shell.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Validation Rules
 
-### Code Splitting
+The reservation form currently enforces the following rules:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- date is required and cannot be in the past
+- time must be one of the available time slots
+- guest count must be a whole number between 1 and 10
+- occasion must match one of the supported options
 
-### Analyzing the Bundle Size
+## Testing Notes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Tests use React Testing Library and Jest
+- Because the app uses `react-router-dom`, tests may mock router primitives when isolating component behavior
+- When the booking API globals are needed in tests, they should be mocked as `window.fetchAPI` and `window.submitAPI`
 
-### Making a Progressive Web App
+## Build Notes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+On Windows, asset filenames under `public/icons_assets` should remain ASCII-safe to avoid avoidable build issues.
 
-### Advanced Configuration
+## Future Improvements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Persist reservations to a real backend API
+- Add menu and reservation management pages
+- Improve accessibility coverage with broader automated tests
+- Add end-to-end tests for the full booking flow
