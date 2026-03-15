@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import HomePage from "./HomePage";
 import BookingPage from "./BookingPage";
@@ -58,11 +58,14 @@ function Main() {
     initializeTimes,
   );
 
+  const [bookingData, setBookingData] = useState(null);
+
   function submitForm(formData) {
     const bookingApi = resolveSubmitApi();
     const isSubmitted = bookingApi ? bookingApi(formData) : true;
 
     if (isSubmitted) {
+      setBookingData(formData);
       navigate("/confirmed-booking");
     }
   }
@@ -81,7 +84,7 @@ function Main() {
             />
           }
         />
-        <Route path="/confirmed-booking" element={<ConfirmedBooking />} />
+        <Route path="/confirmed-booking" element={<ConfirmedBooking bookingData={bookingData} />} />
       </Routes>
     </main>
   );

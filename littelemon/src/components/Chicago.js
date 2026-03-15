@@ -14,20 +14,21 @@ function Chicago() {
           restaurant features a locally-sourced menu with daily specials.
         </p>
         <p>
-          Since opening our doors, we have celebrated the authentic flavors of
-          the Mediterranean with warm hospitality and a passion for bringing
-          people together over great food.
+          To craft the menu, Mario relies on family recipes and his experience
+          as a chef in Italy. Adrian does all the marketing for the restaurant
+          and led the effort to expand the menu beyond classic Italian to
+          incorporate additional cuisines from the Mediterranean region.
         </p>
       </div>
       <div className="about-images">
         <img
-          src="/icons_assets/restaurant.jpg"
-          alt="Inside the Little Lemon restaurant"
+          src="/icons_assets/Mario and Adrian A.jpg"
+          alt="Mario and Adrian, owners of Little Lemon"
           className="about-img-front"
         />
         <img
-          src="/icons_assets/Mario and Adrian A.jpg"
-          alt="Mario and Adrian, owners of Little Lemon"
+          src="/icons_assets/Mario and Adrian b.jpg"
+          alt="Mario and Adrian in the Little Lemon kitchen"
           className="about-img-back"
         />
       </div>
